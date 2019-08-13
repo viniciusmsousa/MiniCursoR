@@ -1,0 +1,16 @@
+Anotacoes
+
+ -> Objetivo
+ 		- Objetivo é o que os alunos saim convencidos de que vale a pena utilizar o tempo para se tornar fluente em R e mostrar as vantagens de se programar invés de utilizar interfaces gráficas
+
+ -> O que o curso vai fazer
+ 		- dar uma introdução à utilização do R para analise de dados;
+ 		- Mostrar como você pode colocar todo o seu fluxo de trabalho dentro do R
+
+
+-> O que o curso não vai fazer
+		- Ensinar a parte teórica de econometria
+
+
+
+

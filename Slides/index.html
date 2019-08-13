@@ -1,0 +1,715 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Aplicacao de Ciencia de Dados</title>
+
+    <meta name="description" content="MiniCursoR">
+    <meta name="author" content="Vinicius Melquiades de Sousa">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/league.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+        h1, h2, h3 {
+            text-shadow: 7px 7px 10px #000000 !important;
+        }
+
+        div.slides {
+            text-shadow: 3px 3px 1px #1c1e20 !important;
+        }
+        
+        blockquote {
+            background: rgba(180, 180, 180, 0.2);
+        }
+        
+        blockquote {
+            text-align: left;
+            width: 90% !important;
+        }
+
+        div.author {
+            text-align: right;
+            margin-right: 10pt;
+        }
+
+        div.author:before {
+            content: '(';
+        }
+
+        div.author:after {
+            content: ')';
+        }
+
+        section.center p {
+            text-align: center;
+        }
+
+        p img {
+            margin-left: auto !important;
+            margin-right: auto !important;
+            display: block;
+            border: 1px solid #2b2b2b !important;
+        }
+        p {
+            text-align: justify;
+        }
+        .side {
+            text-align: center;
+            margin: 0px !important;
+            padding: 0px !important;
+            border: 0px !important;
+        }
+        .side img { 
+            display: inline;
+            margin: 0px !important;
+            padding: 0px !important;
+            border: 0px !important;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .small {
+            font-size: 32px !important;
+        }
+    </style>
+</head>
+
+<body>
+<div class="reveal">
+    <div class="slides">
+
+        <section class="center" data-background-image="images/matrix-2354492.jpg">
+            <h4>Mini Curso de R</h4>
+            <h2>Data Science Workflow em R para Econometria:</h2>
+            <h3>Aula 1: Introdução à Programação com R</h3>
+
+            <p>Vinícius M. de Sousa<br>
+            <small align="left">
+            <a href="https://www.linkedin.com/in/viniciusmsousa/">in/viniciusmsousa/</a><br>
+            <a href="github.com/viniciusmsousa/">github.com/viniciusmsousa</a><br>
+            <a href="mailto:vinisousa04@gmail.com">&lt;vinisousa04@gmail.com&gt;</a>
+            </small>
+            </p>
+            	<h5>Semana Acadêmica Ciências Econômicas</h5>
+                <small>ESAG/UDESC - 12 de Agosto de 2019</small> 
+        </section>
+        
+
+        <section>
+            <section data-transition="zoom" data-background="https://media.giphy.com/media/3ov9jU8GoFU0OGcdwc/giphy.gif" >
+                <h1>Introdução</h1>
+            </section>
+
+
+			<section data-background-image="images/matrix-2354492.jpg">
+
+				 <h3>Quem sou eu</h3>    
+                <div class="row">
+                    <div class="column">                
+                        <ul >
+                            <li class="fragment fade-up" style="font-size: 30px">Nascido em Joinville, 23 anos;</li>
+                            <li class="fragment fade-up" style="font-size: 30px">Cristão;</li>
+                            <li class="fragment fade-up" style="font-size: 30px">Economista pela Esag/Udesc;</li>
+                            <li class="fragment fade-up" style="font-size: 30px">Mestrando em Ciência da Informação no PGCIn/Ufsc;</li>
+                            <li class="fragment fade-up" style="font-size: 30px">Pós-Graduando em Ciência de Dados (Senai/SC e Keyrus);</li>
+                            <li class="fragment fade-up" style="font-size: 30px">Cientista de Dados na <a href="https://www.aquare.la/en/">Aquarela Advanced Analytics</a></li>                       
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <img width="58%" src="images/sobre_mim_foto.JPG">
+                    </div>
+
+
+                </div>
+            </section>
+
+         <section data-background-image="images/matrix-2354492.jpg">
+                <h2>Objetivo do Curso</h2>
+                Introdução ao R para:
+					<ul >
+                        <li class="fragment fade-up" style="font-size: 30px">Econometria (análise de dados, de maneira geral);</li>
+                        <li class="fragment fade-up" style="font-size: 30px">Centralizar todo o fluxo dentro de um ambiente organizado</li>
+                    </ul>
+         </section>
+
+         <section data-background-image="images/DCWorkflow.jpg">
+         </section>
+         <section data-background-image="images/matrix-2354492.jpg">
+					<h2>Organização do Curso</h2>
+                	Parte 1 (Hoje): <p class="fragment fade-up"> Introdução ao R (Pacotes, Tipos de variáveis, Funções, Operadores e Programação);</p>
+                	Parte 2 (Amanhã): <p class="fragment fade-up"> Importar Dados, Limpar Dados, Transformar Dados e Modelar;</p>
+                	Parte 3 (Quinta): <p class="fragment fade-up"> Visualizar, Comunicar e Organizar o Código;</p>
+         </section>
+         <section data-transition="zoom" data-background="https://media.giphy.com/media/fnuSiwXMTV3zmYDf6k/giphy.gif">
+         </section>
+        </section>
+
+        <section>
+            <section data-transition="zoom" data-background-image="images/rErstudio.jpg">
+
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+
+                <div class="row">
+                    <div class="column">
+                    	<img width="18%" src="images/r.png">                
+                        <ul >
+                            <li class="fragment fade-up" style="font-size: 30px">R é um ambiente computacional e uma linguagem de programação que vem progressivamente se especializando em manipulação, análise e visualização gráfica de dados;</li>
+                            <li class="fragment fade-up" style="font-size: 30px">O nome R provém em parte das iniciais dos criadores (Ross Ihaka e Robert Gentleman);</li>
+                            <li class="fragment fade-up" style="font-size: 30px">Criada em 1993 na Universidade de Auckland.</li>                       
+                        </ul>
+                    </div>
+                    <div class="column">
+                    	<img width="30%" src="images/rstudio.png">
+                        <li class="fragment fade-up" style="font-size: 30px">RStudio é um software livre de ambiente de desenvolvimento integrado para R;</li>
+                            <li class="fragment fade-up" style="font-size: 30px">Primeira versão em Feveriro de 2011.</li>
+                    </div>
+                </div>
+            </section>
+            <section data-background-image="images/rstudioFACE.jpg">
+            	<h3 class="fragment fade-up">Exercício: Criar um Projeto no RStudio</h3>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h2>Funções</h2>
+            Modo de realizar as operações com a linguagem: o programador fornece argumentos (inputs) e a função retorna (outputs)
+            <pre><code class="fragment fade-up" style="font-size: 40px" data-trim>
+             rnorm(n=4,mean = 2,sd = 1.2) 
+
+             mean(c(10,20,70))            
+			</code></pre>	
+			<p class="fragment fade-up">Atividade: Gere uma sequência de 100 números aleatórios, com média 1 e desvio padrão 1, e salve-a como "x". Depois verifique com a função mean() que a média é próxima à que você colocou no argumento.</p>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h2>Pacotes</h2>
+            São conjuntos de funções sobre um mesmo "assunto". É necessário instalar os pacotes para poder acessar as funções.
+            <pre><code class="fragment fade-up" style="font-size: 40px" data-trim>
+              install.packages("ggplot2")
+
+              library(ggplot2)
+			</code></pre>	
+			<p class="fragment fade-up">Atividade: Instale o pacote "tidyverse" e verifique se o mesmo foi instalado com sucesso executando o comando "?tidyverse".</p>
+            </section>
+
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h2>Tipos de dados</h2>	
+				<ul >
+                    <li class="fragment fade-up" style="font-size: 40px">Números (numeric);</li>
+                    <li class="fragment fade-up" style="font-size: 40px">Texto (character);</li>
+                    <li class="fragment fade-up" style="font-size: 40px">Categoricos (factor);</li>
+                    <li class="fragment fade-up" style="font-size: 40px">Data (Dates).</li>                       
+                </ul>         
+             <h4 class="fragment fade-up">Atividade: Execute os comandos abaixo para verificar os tipos de dados</h4>
+             <pre class="fragment fade-up" style="font-size: 40px"><code data-trim>
+             class(c(1,2))
+             class(c("a","b"))
+             class(as.factor(c("a","b")))
+             class(as.Date("2008-12-12"))            
+			</code></pre>
+            </section>
+
+
+			<section data-background-image="images/matrix-2354492.jpg">
+            <h2>Estruturas de Dados</h2>	
+				<ul >
+                    <li class="fragment fade-up" style="font-size: 40px">(i) Vetores;</li>
+                    <li class="fragment fade-up" style="font-size: 40px">(ii) Matrizes;</li>
+                    <li class="fragment fade-up" style="font-size: 40px">(iii) DataFrame/Tibbles;</li>
+                    <li class="fragment fade-up" style="font-size: 40px">(iv) Listas</li>                       
+                </ul>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h2>Vetores</h2>	
+				<ul>
+					<li class="fragment fade-up" style="font-size: 40px">Estrutura básica do R;</li>
+                    <li class="fragment fade-up" style="font-size: 40px">Sequência de elementos do mesmo tipo (character, numeric, date, etc..);</li>
+                </ul>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h3>Vetores - Criando</h3>	
+                <pre class="fragment fade-up" style="font-size: 30px"><code data-trim>
+	             vetor1 <- c(1,2,3,4,5) 
+	             vetor2 <- seq(from = 1,to = 5,by = 1) 
+	             vetor3 <- c('o','i','e')            
+				</code></pre>
+			<h3 class="fragment fade-up">Vetores - Acessando elementos</h3>	
+                <pre class="fragment fade-up" style="font-size: 30px"><code data-trim>
+				 vetor1[1]
+				 vetor1[1:3] 
+				 vetor1[length(vetor1)] <- 2 
+				 vetor1            
+				</code></pre>
+				<h3 class="fragment fade-up">Vetores - Operações</h3>	
+                <pre class="fragment fade-up" style="font-size: 30px"><code data-trim>	            
+				sqrt(vetor1)
+				vetor1+1
+				</code></pre>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h2>Matrizes</h2>	
+				<ul>
+					<li class="fragment fade-up" style="font-size: 40px">Nada Além de vetores com duas dimensões;</li>
+                    <li class="fragment fade-up" style="font-size: 40px">Destaca-se todos os dados devem ser do memso tipo na matriz</li>
+                </ul>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h3>Matrizes - Criando</h3>	
+				<pre class="fragment fade-up" style="font-size: 33px"><code data-trim>	            
+				peso <- rnorm(5,65,10)
+				idade <- round(rnorm(5,35,4),0)
+				matriz1 <- cbind(idade,peso)
+				</code></pre>
+			<h3 class="fragment fade-up">Matrizes - Acessando elementos</h3>	
+				<pre class="fragment fade-up" style="font-size: 33px"><code data-trim>	            
+				matriz1[1,2, drop=F]
+				matriz1[3,3, drop=F]
+				</code></pre>
+			<h3 class="fragment fade-up">Matrizes - Atividade</h3>
+			<h5 class="fragment fade-up">Crie um vetor de dias (do dia 1 ao dia 15) e crie um vetor de temperaturas. Depois junte os vetores em uma matriz.</h5>	
+            </section>
+
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h2>Data Frames/Tibbles</h2>	
+				<ul>
+					<li class="fragment fade-up" style="font-size: 40px">Mesma estrutura da matriz (colunas e linhas com o mesmo número de observações);</li>
+                    <li class="fragment fade-up" style="font-size: 40px">Com a diferença de que as colunas podem ser de tipos diferentes.</li>
+                </ul>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h3>Data Frames/Tibbles - Criando</h3>	
+				<pre class="fragment fade-up" style="font-size: 33px"><code data-trim>	            
+				df <- data.frame(
+				  nome = c("Aislan","Apolo","Ana"),
+				  idade = c(18,12,9),
+				  sexo = c("M","M",F)
+					)
+				</code></pre>
+			<h3 class="fragment fade-up">Data Frames/Tibbles - Adicinando Coluna</h3>	
+				<pre class="fragment fade-up" style="font-size: 33px"><code data-trim>	            
+				df$escolaridade <- c("medio", 
+				                     "fundamental",
+				                     "fundamental")
+				df
+				</code></pre>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h2>Listas</h2>	
+				<ul>
+					<li class="fragment fade-up" style="font-size: 40px">Coleção de vetores;</li>
+                    <li class="fragment fade-up" style="font-size: 40px">Vantagem: cada elemento pode ser de qualquer estrutura</li>
+                </ul>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h3>Listas - Criando</h3>	
+				<pre class="fragment fade-up" style="font-size: 33px"><code data-trim>	            
+				lista <- list(matriz1,df,seq(1:5))
+				lista
+				</code></pre>
+				<h3 class="fragment fade-up">Listas - Acessando elementos</h3>	
+				<pre class="fragment fade-up" style="font-size: 33px"><code data-trim>	            
+				lista[1]
+				lista[[1]]
+				</code></pre>
+            </section>
+            <section data-transition="zoom" data-background="https://media.giphy.com/media/3oriO5EMLxl1f7funu/giphy.gif">
+         </section>
+         <section data-background-image="images/matrix-2354492.jpg">
+            <h2>Atividade Estrutura de Dados</h2>	
+				<ul>
+					<li class="fragment fade-up" style="font-size: 40px">1) Crie dois vetores: (i) Com nome de 5 países e (ii) com uma estimativa de população para cada país;</li>
+                    <li class="fragment fade-up" style="font-size: 40px">2) Junte os vetores em um dataframe;</li>
+                    <li class="fragment fade-up" style="font-size: 40px">3) Por fim, crie uma lista que contenha os vetores orignais e o dataframe criado a partir dos vetores;</li>
+                </ul>
+            </section>
+
+           </section>
+
+         <section>
+        	<section data-background="https://media.giphy.com/media/3o6Yg4GUVgIUg3bf7W/giphy.gif">
+        		<h2>Programação</h2>
+        		<h3><span style="display: inline-block;" class="fragment highlight-blue">Funções</span></h3>
+        		<h3><span style="display: inline-block;" >Iterações</span></h3>
+        	</section>
+
+        	<section data-background-image="images/matrix-2354492.jpg">
+            <h2>Funções - Por que usar?</h2>	
+				<ul>
+					<li class="fragment fade-up" style="font-size: 30px">Ajuda a entender o código;</li>
+                    <li class="fragment fade-up" style="font-size: 30px">Caso o cenário mude você precisa atualizar o código apenas e um lugar;</li>
+                    <li class="fragment fade-up" style="font-size: 30px">Elimina erros de copiar e colar.</li>
+                </ul>
+
+            <h2 class="fragment fade-up">Funções - Quando usar?</h2>	
+				<ul>
+					<li class="fragment fade-up" style="font-size: 30px">Rule of thumb: Sempre que copiar um mesmo pedaço de código mais de duas vezes;</li>
+                </ul>    
+            </section>
+
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h2>Funções - Exemplo</h2>	
+				<pre class="fragment fade-up" style="font-size: 28px"><code data-trim>	            
+				df <- data.frame(
+					a = rnorm(10),
+					b=rnorm(10), 
+					c=rnorm(10))
+					df
+				</code></pre>
+
+				<pre class="fragment fade-up" style="font-size: 27px"><code data-trim>	            
+				df$a <- (df$a - min(df$a, na.rm=T))/
+					(max(df$a, na.rm=T)-min(df$a, na.rm=T))
+
+				df$b <- (df$b - min(df$b, na.rm=T))/
+					(max(df$b, na.rm=T)-min(df$b, na.rm=T))
+
+				df$c <- (df$c - min(df$c, na.rm=T))/
+					(max(df$c, na.rm=T)-min(df$c, na.rm=T))
+				df
+				</code></pre>
+			<h4 class="fragment fade-up">Vamos escrever uma função que faz isso</h4>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h2 >Funções - Exemplo</h2>	
+				<h4>Passos para criar uma função:</h4>
+				<ul>
+					<li class="fragment fade-up" style="font-size: 30px">1) Listar os inputs;</li>
+					<li class="fragment fade-up" style="font-size: 30px">2) Computar calculos intermediários;</li>
+                </ul>
+                <pre class="fragment fade-up" style="font-size: 30px"><code data-trim>	            
+				df$a <- (df$a - min(df$a, na.rm=T))/
+					(max(df$a, na.rm=T)-min(df$a, na.rm=T))
+				</code></pre>
+			<h4 class="fragment fade-up">Qual/quais inputs temos? e Há algo que podemos computar?</h4>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h2 >Funções - Exemplo</h2>	
+				<h4>(Possível) Solução</h4>
+                <pre class="fragment fade-up" style="font-size: 30px"><code data-trim>	            
+				rescale01 <- function(x){
+				rng <- range(x, na.rm=T)
+				(x-rng[1]/rng[2]-rng[1])
+			}
+				</code></pre>
+			<h4 class="fragment fade-up">Verificando</h4>
+			<pre class="fragment fade-up" style="font-size: 30px"><code data-trim>	            
+			df2 <- data.frame(a = rnorm(10),b=rnorm(10),
+			  c=rnorm(10))
+			df2$a <- rescale01(df$a)
+			df2$b <- rescale01(df$b)
+			df2$c <- rescale01(df$c)
+			df
+			</code></pre>
+            </section>
+
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h2>Funções - Atividade</h2>	
+				<h4 class="fragment fade-up">Crie uma função para trecho de código abaixo:</h4>
+                <pre class="fragment fade-up" style="font-size: 30px"><code data-trim>
+                	x / sum(x, na.rm = T)
+                	f1 <- function(x){x / sum(x, na.rm = T)}
+                </code></pre>
+                <pre class="fragment fade-up" style="font-size: 30px"><code data-trim>
+                	sd(x, na.rm=T)/mean(x, na.rm=T)
+                </code></pre>
+                <pre class="fragment fade-up" style="font-size: 30px"><code data-trim>
+                	x+y/(x*y)
+                </code></pre>
+            </section>
+
+
+
+
+        	<section data-background="https://media.giphy.com/media/3o6Yg4GUVgIUg3bf7W/giphy.gif">
+        		<h2>Programação</h2>
+        		<h3><span style="display: inline-block;" >Funções</span></h3>
+        		<h3><span style="display: inline-block;" class="fragment highlight-blue">Iterações</span></h3>
+
+        	</section>
+
+        	<section data-background-image="images/matrix-2354492.jpg">
+            <h2>Iterações - O que são</h2>	
+				<ul>
+					<li class="fragment fade-up" style="font-size: 30px">Evita repetição de código quando precisamos fazer a mesma coisa com múltiplos inputs;</li>
+                </ul>
+            <h2 class="fragment fade-up">Iterações - loop for</h2>	
+                <pre class="fragment fade-up" style="font-size: 30px"><code data-trim>
+                	for(i in 1:10){
+                	print(i)
+                	}
+                </code></pre>
+            </section>
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h3>Loop for - Exemplo</h3>
+            <span class="fragment fade-up">Vamos reescrever o código abaixo com um loop for</span>	
+                <pre class="fragment fade-up" style="font-size: 24px"><code data-trim>
+                	df2 <- data.frame(Geo = rnorm(10,7,2),
+                		Mat=rnorm(10,6.5,4),
+                		Ing=rnorm(10,8,3))
+
+                	df2$Geo <- ifelse(df$Geo > 6.9,"Passou","Reprovado")
+                	df2$Mat <- ifelse(df$Mat > 6.9,"Passou","Reprovado")
+                	df2$Ing <- ifelse(df$Ing > 6.9,"Passou","Reprovado")
+                	df2
+                </code></pre>
+                <pre class="fragment fade-up" style="font-size: 25px"><code data-trim>
+                	df2 <- data.frame(Geo = rnorm(10,7,2),
+                		Mat=rnorm(10,6.5,4),
+                		Ing=rnorm(10,8,3))
+
+                	for(i in 1:ncol(df2)){
+                	df2[,i] <- ifelse(df2[,i] > 6.9,"Passou","Reprovado")
+                	}
+                	df2
+                </code></pre>
+            </section>
+
+            <section data-background-image="images/matrix-2354492.jpg">
+            <h3>Loop for - Atividade</h3>
+            <span class="fragment fade-up">Reescreva o Código abaixo em forma de loop</span>	
+                <pre class="fragment fade-up" style="font-size: 24px"><code data-trim>
+					df2 <- data.frame(a = rnorm(10),b=rnorm(10),
+					c=rnorm(10))
+					df2$a <- rescale01(df$a)
+					df2$b <- rescale01(df$b)
+					df2$c <- rescale01(df$c)
+					df</code></pre>
+            </section>
+
+            <section data-background-image="images/matrix-2354492.jpg">
+            <span class="fragment fade-up">Reescreva o Código abaixo em forma de loop</span>	
+                <pre class="fragment fade-up" style="font-size: 24px"><code data-trim>
+					df2 <- data.frame(a = rnorm(10),b=rnorm(10),
+					c=rnorm(10))
+					df2$a <- rescale01(df$a)
+					df2$b <- rescale01(df$b)
+					df2$c <- rescale01(df$c)
+					df2
+				</code></pre>
+
+			<span class="fragment fade-up">E se eu disser que podemos fazer isso com uma função?</span>
+            </section>
+
+          <section data-transition="zoom" data-background="https://media.giphy.com/media/lkdH8FmImcGoylv3t3/giphy.gif">
+          	<h2 class="fragment fade-up">Funções apply</h2>
+          </section>
+
+           <section data-background-image="images/matrix-2354492.jpg">
+           	<h2>Funções Apply</h2>
+           		<ul>
+					<li class="fragment fade-up" style="font-size: 30px">Permite abstrair os loops em funções;</li>
+					<li class="fragment fade-up" style="font-size: 30px">É a lógica do "Big Data"</li>
+                </ul>
+
+                <h4 class="fragment fade-up">Funcao map - exemplo</h4>
+                 <pre class="fragment fade-up" style="font-size: 24px"><code data-trim>
+					df2 <- data.frame(Geo = rnorm(10,7,2),
+                		Mat=rnorm(10,6.5,4),
+                		Ing=rnorm(10,8,3))
+				</code></pre>
+				<pre class="fragment fade-up" style="font-size: 20px"><code data-trim>
+					apply(X = df2, MARGIN = 2,
+                	FUN = function(x){ifelse(x>6.9,"aprovado","reprovado")}
+                	)
+				</code></pre>
+			</section>
+
+			<section data-background-image="images/matrix-2354492.jpg">
+           	<h2>Funções Apply - Atividade</h2>
+           	<span class="fragment fade-up">Transforme o loop for em uma funcao apply</span>
+           	           	<pre class="fragment fade-up" style="font-size: 24px"><code data-trim>
+                 	df2 <- data.frame(a = rnorm(10),b=rnorm(10),
+                 	c=rnorm(10))
+				</code></pre>
+                 <pre class="fragment fade-up" style="font-size: 24px"><code data-trim>
+                 	df2 <- data.frame(a = rnorm(10),b=rnorm(10),
+                 	c=rnorm(10))
+					for(i in 1:ncol(df2)){
+					  df[,i] <- rescale(df[,i])
+					}
+				</code></pre>
+			</section>
+        </section>
+
+
+            <section data-background-image="images/matrix-2354492.jpg">
+                <h4>Obrigado pela Atenção</h4>
+                <div class="row">
+                    <div class="column">
+                        <h3>Vinícius M. de Sousa</h3>
+                        <h6>Economista e Cientista de Dados</h6>
+                        <ul>
+                            <li style="font-size: 30px"><a href="https://www.linkedin.com/in/viniciusmsousa/">in/viniciusmsousa/</a></li>
+                            <li style="font-size: 30px"><a href="github.com/viniciusmsousa/">github.com/viniciusmsousa</a></li>
+                            <li style="font-size: 30px"><a href="mailto:vinisousa04@gmail.com">&lt;vinisousa04@gmail.com&gt;</a></li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                    		<img src="images/qr_code_in.png" height="280" width="280">
+                    </div>
+
+                    <h3 class=" fragment fade-up">Dúvidas/Perguntas/Considerações/Sugestões?</h3>
+                </div>
+            </section>
+
+        <section class="center" data-background-image="images/matrix-2354492.jpg">
+            <h4>Mini Curso de R</h4>
+            <h3>Data Science Workflow em R para Econometria:</h3>
+            <h4>Aula 2: Importação, Limpeza, Transformação e Modelagem</h4>
+
+            <p>Vinícius M. de Sousa<br>
+            <small align="left">
+            <a href="https://www.linkedin.com/in/viniciusmsousa/">in/viniciusmsousa/</a><br>
+            <a href="github.com/viniciusmsousa/">github.com/viniciusmsousa</a><br>
+            <a href="mailto:vinisousa04@gmail.com">&lt;vinisousa04@gmail.com&gt;</a>
+            </small>
+            </p>
+            	<h5>Semana Acadêmica Ciências Econômicas</h5>
+                <small>ESAG/UDESC - 13 de Agosto de 2019</small> 
+        </section>
+
+        <section data-transition="zoom" data-background="https://media.giphy.com/media/ely3apij36BJhoZ234/giphy.gif">
+            <h2 class="fragment fade-up">Parabéns pelo dia do Economista para gente</h2>
+        </section>
+        <section>
+
+         <section data-background-image="images/DCWorkflow.jpg">
+         </section>            
+        <section class="center" data-background-image="images/matrix-2354492.jpg">
+            <h3 >Definindo o Problema</h3>
+
+            <span class="fragment fade-up">Qual o impacto, ao longo dos anos, da qualidade institucional sobre a percepção de corrupção no mundo?</span>
+            <h5 class="fragment fade-up">Para isso precisamos de dados e pacotes.</h5>
+        </section>
+
+        <section class="center" data-background-image="images/matrix-2354492.jpg">
+            <h3 class="fragment fade-up">Pacotes que vamos usar:</h3>
+            <pre class="fragment fade-up" style="font-size: 24px"><code data-trim>
+                    library(tidyverse)
+                    library(broom)
+                    library(forcats)
+                    library(ggthemes)
+                    source("00FuncoesProntas.R")
+                </code></pre>
+        </section>
+
+
+        <section data-transition="zoom" data-background-iframe="https://www.transparency.org/research/cpi">
+        </section>
+        <section data-transition="zoom" data-background-iframe="https://www.globalinnovationindex.org/analysis-indicator">
+        </section>
+    </section>
+
+    
+    <section>
+     <section data-transition="zoom" data-background="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif">
+         <h2>Importação dos Dados</h2>
+     </section>
+     <section data-transition="zoom" data-background="https://media.giphy.com/media/kXBVtKjLxINji/giphy.gif">
+         <h2>Limpeza dos Dados</h2>
+     </section>
+     <section data-transition="zoom" data-background="https://media.giphy.com/media/CRwUOHpwa9Lhe/giphy.gif">
+         <h2>Transformação dos Dados</h2>
+     </section>
+      <section data-background-image="images/tidydata.jpg">
+         </section> 
+     <section data-transition="zoom" data-background="https://media.giphy.com/media/9RXJJBPDWx9nfhDmT1/giphy.gif">
+         <h2>Modelagem dos Dados</h2>
+     </section>     
+
+    </section>
+
+
+
+
+
+
+
+            <section data-background-image="images/matrix-2354492.jpg">
+                <h4>Obrigado pela Atenção</h4>
+                <div class="row">
+                    <div class="column">
+                        <h3>Vinícius M. de Sousa</h3>
+                        <h6>Economista e Cientista de Dados</h6>
+                        <ul>
+                            <li style="font-size: 30px"><a href="https://www.linkedin.com/in/viniciusmsousa/">in/viniciusmsousa/</a></li>
+                            <li style="font-size: 30px"><a href="github.com/viniciusmsousa/">github.com/viniciusmsousa</a></li>
+                            <li style="font-size: 30px"><a href="mailto:vinisousa04@gmail.com">&lt;vinisousa04@gmail.com&gt;</a></li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                            <img src="images/qr_code_in.png" height="280" width="280">
+                    </div>
+
+                    <h3 class=" fragment fade-up">Dúvidas/Perguntas/Considerações/Sugestões?</h3>
+                </div>
+            </section>
+
+        
+
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+
+        controls: true,
+        progress: true,
+        history: true,
+
+        transition: 'convex', // none/fade/slide/convex/concave/zoom
+        slideNumber: 'c/t',
+        showSlideNumber : 'speaker',
+
+
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
+

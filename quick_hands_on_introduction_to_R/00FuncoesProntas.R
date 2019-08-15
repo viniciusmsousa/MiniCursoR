@@ -1,7 +1,6 @@
 
 # Selecionar Paises com dados Balanceados ---------------------------------
 
-
 filtro <- function(df){
   # OBS: 
   # Seleciona os paises que tem dados balanceados
@@ -9,7 +8,6 @@ filtro <- function(df){
   
   lista_paises <- as.character(unique(df$Pais))
   paises_completos <- vector(mode = "character",length = length(lista_paises))
-  
   for(i in seq_along(lista_paises)){
     pais_atual <- df %>% 
       filter(Pais == lista_paises[i])

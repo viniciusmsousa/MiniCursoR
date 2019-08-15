@@ -1,3 +1,5 @@
-# Exemplo de como analisar conteúdo do Youtube
+## Introdução Prática ao R
 
-Apresentação feita no dia 14 de Maio de 2019 na ACATE. Disponível no link: https://viniciusmsousa.github.io/Aplicacao_STM/#/ 
+O objetivo do curso é mostrar como utilizar o R para fazer o workflow de um projeto de análise de dados dentro de uma única ferramenta.
+
+A apresentação está disponível no link https://viniciusmsousa.github.io/MiniCursoR/#/

@@ -99,4 +99,134 @@ regressoesPorPais
 datasetFinal
 
 
+# Visualização ------------------------------------------------------------
+
+
+
+# Histograma
+datasetFinal %>% 
+  ggplot(aes(x=politico))+
+  geom_histogram()+
+  theme_minimal()
+
+
+
+
+# Densidade
+datasetFinal %>% 
+  ggplot(aes(x=negocio, fill=Pais))+
+  geom_density()
+
+# Dispersão
+datasetFinal %>% 
+  ggplot(aes(x=negocio, y=ipc, color=Ano,
+             shape=Ano))+
+  geom_point(size=2)+theme_minimal()+
+  geom_smooth(method = "lm")
+
+
+
+
+
+# boxplot
+datasetFinal %>% 
+  ggplot(aes(y=ipc, x=Ano, fill=Ano))+
+  geom_boxplot()+theme_stata()
+
+
+SumarioPorAno <- bind_rows(regressoesPorAno)
+SumarioPorAno %>% 
+  group_by(term,ano) 
+  summarise(
+    media = mean(estimate)
+  )
+
+
+
+
+
+
+
+
+
+
+## Visualizando Resultado do Modelo
+## Preparando Dado para visualizar
+SumarioPorAno <- bind_rows(regressoesPorAno)
+
+
+linhaPVALOR <- tibble(
+  term=as_factor(c("estimate","p.value")),
+  Valor = c(NA,0.05))
+
+SumarioPorAno %>% 
+  filter(term != "(Intercept)") %>%
+  select(term,ano,estimate,p.value) %>% 
+  mutate(
+    term = fct_reorder(term,estimate)
+  ) %>% 
+  gather(Variavel,Valor,c(estimate,p.value)) %>% 
+  ggplot(aes(x=term,y=Valor))+
+  geom_bar(stat="identity")+
+  coord_flip()+
+  facet_grid(rows=vars(ano),cols=vars(Variavel))+
+  theme_minimal()+
+  geom_hline(data = linhaPVALOR,
+             aes(yintercept=Valor))
+
+
+
+SumarioPorAno %>% 
+  filter(term != "(Intercept)") %>%
+  select(term,ano,estimate,p.value) %>% 
+  mutate(
+    term = fct_reorder(term,estimate)
+  ) %>% 
+  gather(Variavel,Valor,-c(term,ano)) %>% 
+  ggplot(aes(x=term,y=Valor))+
+  geom_bar(position='dodge',stat="identity")+
+  coord_flip()+
+  facet_grid(rows=vars(ano),cols=vars(Variavel))+
+  theme_minimal()+geom_hline(data = linhaPVALOR,
+                             aes(yintercept = Valor))
+
+
+
+
+
+
+
+
+
+# Grafico com Coeficiente Estimado e p. Valor lado a lado
+linhaPVALOR <- tibble(Variavel=as_factor(c("estimate","p.value")),
+                      Valor = c(NA,0.05))
+SumarioPorAno %>% 
+  filter(term != "(Intercept)") %>%
+  select(term,ano,estimate,p.value) %>% 
+  mutate(
+    term = fct_reorder(term,estimate)
+  ) %>% 
+  gather(Variavel,Valor,-c(term,ano)) %>% 
+  ggplot(aes(x=term,y=Valor))+
+  geom_bar(position='dodge',stat="identity")+
+  coord_flip()+
+  facet_grid(rows=vars(ano),cols=vars(Variavel))+
+  theme_minimal()+geom_hline(data = linhaPVALOR,
+                             aes(yintercept = Valor,
+                                 x=term))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

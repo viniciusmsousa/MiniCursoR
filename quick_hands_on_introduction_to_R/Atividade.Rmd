@@ -1,0 +1,121 @@
+---
+title: "Mini Curso R"
+author: "Vinicius"
+date: "15 de Agosto de 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE,
+                      error = TRUE)
+
+
+library(tidyverse)
+library(broom)
+library(forcats)
+library(ggthemes)
+source("00FuncoesProntas.R")
+library(stargazer)
+
+```
+
+
+```{r tratamento dados}
+
+instituicoes <- as_tibble(read.csv("Dados/institutions.csv",sep = ";"))
+
+corrupcao <- as_tibble(read.csv("Dados/cpi.csv",sep = ";"))
+
+
+
+# Limpar Dados ------------------------------------------------------------
+
+## Arrumando nome das colunas
+colnames(instituicoes) <- c("Pais","Variavel",2011,2013:2017)
+
+colnames(corrupcao) <- c("Sigla","Pais",2011:2017)
+
+
+## Tirando os NAs
+instituicoes <- filtro(instituicoes)
+
+corrupcao <- filtro(corrupcao)
+
+
+# Transformar Dados -------------------------------------------------------
+
+## Variaveis Como colunas e observações como linhas
+instituicoes <- instituicoes %>% 
+  gather(key = Ano,value = valor,-c(Pais,Variavel)) %>% 
+  spread(key = Variavel,value = valor)
+
+
+corrupcao <- corrupcao %>% 
+  gather(key = Ano,value = ipc,-c(Sigla,Pais))
+
+
+## Juntando Dados e Renomenado Variaveis
+
+datasetFinal <- instituicoes %>% 
+  inner_join(corrupcao,
+             c("Pais","Ano")) %>% 
+  select(-c(`2`,`3`)) %>% 
+  rename(politico = `1.1.`,
+         regulatorio = `1.2.`,
+         negocio = `1.3.`,
+         sof_mercado = `4`,
+         sof_negocio = `5`)
+```
+
+
+
+## Atividade Mini Curso
+
+Essa atividade tem como objetivo ser meu primeiro rmarkdown, o primeiro de muito!
+
+### Tabela regressão
+
+```{r modelagem, results = 'asis'}
+
+rg <- lm(formula = ipc~politico+regulatorio+
+           negocio+sof_mercado+sof_negocio,data = datasetFinal)
+sumario <- summary(rg)
+
+stargazer(rg,type = "latex",title = "Minha regressao é demais",decimal.mark = ",")
+```
+
+### Meu grafico demais
+
+```{r meu plot}
+
+
+# Dispersão
+datasetFinal %>% 
+  ggplot(aes(x=negocio, y=ipc, color=Ano,
+             shape=Ano))+
+  geom_point(size=2)+theme_minimal()+
+  geom_smooth(method = "lm")+ggtitle("Grafico de dispesão")
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

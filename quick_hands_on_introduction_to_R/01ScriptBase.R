@@ -116,13 +116,13 @@ datasetFinal %>%
 datasetFinal %>% 
   ggplot(aes(x=negocio, fill=Pais))+
   geom_density()
-
-# Dispersão
-datasetFinal %>% 
-  ggplot(aes(x=negocio, y=ipc, color=Ano,
-             shape=Ano))+
-  geom_point(size=2)+theme_minimal()+
-  geom_smooth(method = "lm")
+  
+  # Dispersão
+  datasetFinal %>% 
+    ggplot(aes(x=negocio, y=ipc, color=Ano,
+               shape=Ano))+
+    geom_point(size=2)+theme_minimal()+
+    geom_smooth(method = "lm")
 
 
 
